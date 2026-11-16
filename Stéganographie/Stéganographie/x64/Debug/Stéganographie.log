@@ -1,0 +1,6 @@
+﻿  Stéganographie.cpp
+C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(39,32): warning C4305: 'initialisation' : troncation de 'int' à 'uint8_t'
+C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(39,34): warning C4309: 'initialisation' : troncation de valeur de constante
+C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(41,28): warning C4305: 'initialisation' : troncation de 'int' à 'uint8_t'
+C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(41,30): warning C4309: 'initialisation' : troncation de valeur de constante
+  Stéganographie.vcxproj -> C:\Users\abroust\source\repos\Stéganographie\x64\Debug\Stéganographie.exe
