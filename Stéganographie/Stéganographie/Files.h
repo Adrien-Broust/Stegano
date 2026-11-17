@@ -6,6 +6,7 @@
 
 class Files
 {
-
+public:
+	static void openFileBmp(const char* file);
 };
 

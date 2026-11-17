@@ -24,6 +24,7 @@
     <ProjectGuid>{19c15262-566a-464a-a096-d3fa359bd887}</ProjectGuid>
     <RootNamespace>Stéganographie</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Stegano</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -125,7 +126,7 @@
   <ItemGroup>
     <ClCompile Include="Bits.cpp" />
     <ClCompile Include="Files.cpp" />
-    <ClCompile Include="Stéganographie.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bits.h" />
