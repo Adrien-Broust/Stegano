@@ -10,6 +10,6 @@ class Files
 {
 public:
 	static void openFileBmp(const char* file);
-	void copyFile(const char* file);
+	int offsetPixel(const char* file);
 };
 
