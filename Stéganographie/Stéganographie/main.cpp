@@ -11,6 +11,6 @@ enum Row
 
 int main()
 {
-    Files::openFileBmp("Apple.bmp");
+    Files::copyFile("Apple.bmp", "Apple_copy.bmp");
+	Files::compareFiles("Apple.bmp", "Apple_copy.bmp");
 }
-

@@ -31,3 +31,38 @@ int Files::offsetPixel(const char* file)
     int pixelOffset = read_file.tellg();
     return pixelOffset;
 }
+
+void Files::copyFile(const char* file, const char* fileCopy)
+{
+	std::ifstream origin(file, std::ios::binary);
+	if (!origin.is_open())
+	{
+		throw std::runtime_error("Cannot open file");
+	}
+	std::ofstream copy(fileCopy, std::ios::binary);
+	if (!copy.is_open())
+	{
+		throw std::runtime_error("Cannot open copy file");
+	}
+	copy << origin.rdbuf();
+}
+
+//void Files::compareFiles(const char* file1, const char* file2)
+//{
+//    std::ifstream f1(file1, std::ios::binary);
+//    std::ifstream f2(file2, std::ios::binary);
+//    if (!f1.is_open() || !f2.is_open())
+//    {
+//        throw std::runtime_error("Cannot open file");
+//    }
+//    f1.seekg(0, std::ios::end);
+//    f2.seekg(0, std::ios::end);
+//    if (f1.tellg() != f2.tellg())
+//    {
+//        std::cerr << "Files are different sizes." << std::endl;
+//        return;
+//    }
+//	f1.seekg(0, std::ios::beg);
+//	f2.seekg(0, std::ios::beg);
+//    
+//}
