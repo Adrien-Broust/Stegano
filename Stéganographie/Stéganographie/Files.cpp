@@ -20,16 +20,35 @@ void Files::openFileBmp(const char* file)
     }
 }
 
-int Files::offsetPixel(const char* file)
+uint8_t Files::GetoffsetPixel(const char* file)
 {
     std::ifstream read_file(file, std::ios::binary);
     if (!read_file.is_open())
     {
         throw std::runtime_error("Cannot open file");
     }
-    read_file.seekg(9, std::ios::beg);
-    int pixelOffset = read_file.tellg();
+    const size_t buffersize = std::filesystem::file_size(file);
+    std::vector<char> buffer(buffersize);
+    read_file.read(buffer.data(), buffersize);
+    uint32_t pixelOffset = buffer[0] << 10 | buffer[1] << 10 | buffer[2] << 10 | buffer[3] << 10;
+    std::cout << pixelOffset;
     return pixelOffset;
+}
+
+size_t Files::GetStride(const char* file)
+{
+    std::ifstream read_file(file, std::ios::binary);
+    if (!read_file.is_open())
+    {
+        throw std::runtime_error("Cannot open file");
+    }
+    const size_t buffersize = std::filesystem::file_size(file);
+    std::vector<char> buffer(buffersize);
+    read_file.read(buffer.data(), buffersize);
+    uint32_t witdh = buffer[0] << 17 | buffer[1] << 17 | buffer[2] << 17 | buffer[3] << 17;
+    std::size_t stride = (witdh * 3 + 3) / 4 * 4;
+    std::cout << std::dec << +stride;
+    return stride;
 }
 
 void Files::copyFile(const char* file, const char* fileCopy)
@@ -55,14 +74,5 @@ void Files::copyFile(const char* file, const char* fileCopy)
 //    {
 //        throw std::runtime_error("Cannot open file");
 //    }
-//    f1.seekg(0, std::ios::end);
-//    f2.seekg(0, std::ios::end);
-//    if (f1.tellg() != f2.tellg())
-//    {
-//        std::cerr << "Files are different sizes." << std::endl;
-//        return;
-//    }
-//	f1.seekg(0, std::ios::beg);
-//	f2.seekg(0, std::ios::beg);
 //    
 //}

@@ -1,4 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Stéganographie.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
   Files.cpp
-C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(31,21): warning C4244: 'initialisation' : conversion de 'std::streamoff' en 'int', perte possible de données
-  Stéganographie.vcxproj -> C:\Users\brous\Source\Repos\Stegano\Stéganographie\x64\Debug\Stegano.exe
+  main.cpp
+  Génération de code en cours...
+  Stéganographie.vcxproj -> C:\Users\abroust\source\repos\Stegano\Stéganographie\x64\Debug\Stegano.exe
