@@ -13,7 +13,7 @@ class Files
 private:
     uint32_t offsetPixel;
     uint32_t width;
-    uint32_t height;
+    int32_t height;
     size_t stride;
 	std::vector<uint32_t> buffer;
 public:
@@ -21,9 +21,9 @@ public:
     void copyFile(const char* source, const char* destination);
     uint32_t GetoffsetPixel(const char* file);
     uint32_t GetWidth(const char* file);
-    uint32_t GetHeight(const char* file);
+    int32_t GetHeight(const char* file);
     size_t GetStride(const char* file);
-    uint8_t componantFile(const char* file, uint32_t row, uint32_t column);
+    uint8_t componantFile(const char* file, uint32_t row, uint32_t column, uint32_t channel);
     void hideBit(const char* file, int bit);
 };
 

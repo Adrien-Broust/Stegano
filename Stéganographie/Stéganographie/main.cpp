@@ -4,5 +4,6 @@
 
 int main()
 {
-    Files::componantFile("Apple.bmp", 415, 1038);
+    Files imageApple;
+    imageApple.componantFile("Apple.bmp", 415, 151, 0);
 }
