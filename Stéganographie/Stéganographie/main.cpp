@@ -4,5 +4,5 @@
 
 int main()
 {
-    Files::GetoffsetPixel("Apple.bmp");
+    Files::GetStride("Apple.bmp");
 }

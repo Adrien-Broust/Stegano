@@ -30,7 +30,11 @@ uint8_t Files::GetoffsetPixel(const char* file)
     const size_t buffersize = std::filesystem::file_size(file);
     std::vector<char> buffer(buffersize);
     read_file.read(buffer.data(), buffersize);
-    uint32_t pixelOffset = buffer[0] << 10 | buffer[1] << 10 | buffer[2] << 10 | buffer[3] << 10;
+	uint32_t pixelOffset = 
+        static_cast<uint32_t>(static_cast<uint8_t>(buffer[10])) |
+        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[11])) << 8) |
+        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[12])) << 16) |
+        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[13])) << 24);
     std::cout << pixelOffset;
     return pixelOffset;
 }
@@ -45,8 +49,12 @@ size_t Files::GetStride(const char* file)
     const size_t buffersize = std::filesystem::file_size(file);
     std::vector<char> buffer(buffersize);
     read_file.read(buffer.data(), buffersize);
-    uint32_t witdh = buffer[0] << 17 | buffer[1] << 17 | buffer[2] << 17 | buffer[3] << 17;
-    std::size_t stride = (witdh * 3 + 3) / 4 * 4;
+    uint32_t width =
+        static_cast<uint32_t>(static_cast<uint8_t>(buffer[18])) |
+        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[19])) << 8) |
+        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[20])) << 16) |
+        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[21])) << 24);
+    std::size_t stride = (width * 3 + 3) / 4 * 4;
     std::cout << std::dec << +stride;
     return stride;
 }
@@ -65,14 +73,3 @@ void Files::copyFile(const char* file, const char* fileCopy)
 	}
 	copy << origin.rdbuf();
 }
-
-//void Files::compareFiles(const char* file1, const char* file2)
-//{
-//    std::ifstream f1(file1, std::ios::binary);
-//    std::ifstream f2(file2, std::ios::binary);
-//    if (!f1.is_open() || !f2.is_open())
-//    {
-//        throw std::runtime_error("Cannot open file");
-//    }
-//    
-//}
