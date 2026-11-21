@@ -4,5 +4,5 @@
 
 int main()
 {
-    Files::GetStride("Apple.bmp");
+    Files::componantFile("Apple.bmp", 415, 1038);
 }

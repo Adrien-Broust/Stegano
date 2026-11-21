@@ -10,13 +10,20 @@
 
 class Files
 {
+private:
+    uint32_t offsetPixel;
+    uint32_t width;
+    uint32_t height;
+    size_t stride;
+	std::vector<uint32_t> buffer;
 public:
-    static void openFileBmp(const char* filename);
-    static void copyFile(const char* source, const char* destination);
-    static uint32_t GetoffsetPixel(const char* file);
-	static uint32_t GetWidth(const char* file);
-	static uint32_t GetHeight(const char* file);
-    static size_t GetStride(const char* file);
-    void composanteFile(const char* file);
+    void openFileBmp(const char* file);
+    void copyFile(const char* source, const char* destination);
+    uint32_t GetoffsetPixel(const char* file);
+    uint32_t GetWidth(const char* file);
+    uint32_t GetHeight(const char* file);
+    size_t GetStride(const char* file);
+    uint8_t componantFile(const char* file, uint32_t row, uint32_t column);
+    void hideBit(const char* file, int bit);
 };
 
