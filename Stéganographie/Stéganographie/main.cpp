@@ -10,11 +10,11 @@ int main()
         auto bmp = Files::ReadAll("Apple.bmp");
         std::size_t start = Files::PixelOffset(bmp);
 
-        Message::Embed(bmp, start, "Hello World", "cle"); // Cette "cle" est la "serrure"
+        Message::Embed(bmp, start, "Hello World", "cle"); 
         Files::WriteAll("Apple_stego.bmp", bmp);
 
         auto loaded = Files::ReadAll("Apple_stego.bmp");
-        std::cout << Message::Extract(loaded, Files::PixelOffset(loaded), "cle") << "\n"; // Cette "cle" est la "clé"
+        std::cout << Message::Extract(loaded, Files::PixelOffset(loaded), "cle") << "\n"; 
     }
     catch (const std::exception& e)
     {

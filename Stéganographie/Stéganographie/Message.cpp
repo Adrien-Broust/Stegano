@@ -8,7 +8,6 @@ void Message::ApplyXor(std::vector<std::uint8_t>& data, const std::string& key)
         data[i] ^= static_cast<std::uint8_t>(key[i % key.size()]);
 }
 
-// Écrit chaque bit de 'bytes' dans le bit de poids faible d'un octet du support
 void Message::WriteBytes(std::vector<std::uint8_t>& carrier, std::size_t start,
     const std::vector<std::uint8_t>& bytes)
 {
@@ -25,7 +24,6 @@ void Message::WriteBytes(std::vector<std::uint8_t>& carrier, std::size_t start,
     }
 }
 
-// Relit exactement 'count' octets depuis les bits de poids faible
 std::vector<std::uint8_t> Message::ReadBytes(const std::vector<std::uint8_t>& carrier,
     std::size_t start, std::size_t count)
 {
