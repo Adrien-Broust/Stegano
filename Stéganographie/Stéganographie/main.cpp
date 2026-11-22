@@ -6,5 +6,6 @@ int main()
 {
     Files imageApple;
 	imageApple.openFileBmp("Apple.bmp");
-	imageApple.componantFile("Apple.bmp", 0, 0, 0);
+	imageApple.componantFile(0, 0, 0);
+	imageApple.hideOctet(0, 0, 0, 12);
 }

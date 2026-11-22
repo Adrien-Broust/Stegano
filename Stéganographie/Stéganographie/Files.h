@@ -23,7 +23,8 @@ public:
     uint32_t GetWidth(const char* file);
     int32_t GetHeight(const char* file);
     size_t GetStride(const char* file);
-    uint8_t componantFile(const char* file, uint32_t row, uint32_t column, uint32_t channel);
-    void hideBit(const char* file, int bit);
+    uint8_t componantFile(uint32_t row, uint32_t column, uint32_t channel);
+	void hideBit(uint32_t row, uint32_t column, uint32_t channel, uint8_t bit);
+	void hideOctet(uint32_t row, uint32_t column, uint32_t channel, uint8_t octet);
 };
 

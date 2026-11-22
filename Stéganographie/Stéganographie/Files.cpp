@@ -18,22 +18,9 @@ void Files::openFileBmp(const char* file)
     {
         std::cerr << "Erreur : Champs de l'en-tete incorrect";
     }
-	width = 
-        static_cast<uint32_t>(static_cast<uint8_t>(buffer[18])) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[19])) << 8) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[20])) << 16) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[21])) << 24);
-	uint32_t tempHeight =
-        static_cast<uint32_t>(static_cast<uint8_t>(buffer[22])) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[23])) << 8) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[24])) << 16) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[25])) << 24);
-    height = static_cast<int32_t>(tempHeight);
-    offsetPixel = 
-        static_cast<uint32_t>(static_cast<uint8_t>(buffer[10])) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[11])) << 8) |
-        (static_cast<uint32_t>(static_cast<uint8_t>(buffer[12])) << 16) |
-		(static_cast<uint32_t>(static_cast<uint8_t>(buffer[13])) << 24);
+	width = buffer[18] | buffer[19] << 8 | buffer[20] << 16 | buffer[21] << 24;
+	height =buffer[22] | buffer[23] << 8 | buffer[24] << 16 | buffer[25] << 24;
+    offsetPixel = buffer[10] | buffer[11] << 8 | buffer[12] << 16 | buffer[13] << 24;
 	stride = (width * 3 + 3) / 4 * 4;
 }
 
@@ -57,15 +44,13 @@ size_t Files::GetStride(const char* file)
     return stride;
 }
 
-uint8_t Files::componantFile(const char* file, uint32_t row, uint32_t column, uint32_t channel)
+uint8_t Files::componantFile(uint32_t row, uint32_t column, uint32_t channel)
 {
     if (row >= height || column >= width || channel >= 3)
     {
         throw std::out_of_range("Pixel invalide");
     }
-
-    uint32_t bmpRow;
-
+    uint32_t bmpRow = 0;
     if (height > 0)
     {
         bmpRow = height - 1 - row;
@@ -74,27 +59,44 @@ uint8_t Files::componantFile(const char* file, uint32_t row, uint32_t column, ui
     {
         bmpRow = row;
     }
-
     size_t index = offsetPixel + bmpRow * stride + column * 3 + channel;
-	std::cout << "Colonne: " << column << ", Ligne: " << bmpRow << ", Canal: " << channel << std::endl;
-    std::cout << "Index: " << buffer[index] << std::endl;
     return buffer[index];
 }
 
-    
-		
-
-void Files::hideBit(const char* file, int bit)
+void Files::hideBit(uint32_t row, uint32_t column, uint32_t channel, uint8_t bit)
 {
-    std::ifstream read_file(file, std::ios::binary);
-    if (!read_file.is_open())
+	uint8_t pixelValue = componantFile(row, column, channel);
+	pixelValue = (pixelValue & 0xFEu) | bit;
+    uint32_t bmpRow = 0;
+    if (height > 0)
     {
-        throw std::runtime_error("Cannot open file");
+        bmpRow = height - 1 - row;
     }
-    const size_t buffersize = std::filesystem::file_size(file);
-    std::vector<char> buffer(buffersize);
-    read_file.read(buffer.data(), buffersize);
+    else
+    {
+        bmpRow = row;
+    }
+    size_t index = offsetPixel + bmpRow * stride + column * 3 + channel;
+	buffer[index] = pixelValue;
+}
 
+void Files::hideOctet(uint32_t row, uint32_t column, uint32_t channel, uint8_t octet)
+{
+    for (int i = 0; i < 8; ++i)
+    {
+        uint8_t bit = (octet >> (7 - i)) & 1;
+        hideBit(row, column, channel, bit);
+        ++column;
+        if (column >= width)
+        {
+            column = 0;
+            ++row;
+            if (row >= std::abs(height))
+            {
+                std::cerr << "Erreur : pas assez de place pour cacher l'octet";
+            }
+        }
+    }
 }
 
 void Files::copyFile(const char* file, const char* fileCopy)
