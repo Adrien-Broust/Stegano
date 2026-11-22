@@ -1,6 +1,12 @@
-﻿  Stéganographie.cpp
-C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(39,32): warning C4305: 'initialisation' : troncation de 'int' à 'uint8_t'
-C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(39,34): warning C4309: 'initialisation' : troncation de valeur de constante
-C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(41,28): warning C4305: 'initialisation' : troncation de 'int' à 'uint8_t'
-C:\Users\abroust\source\repos\Stéganographie\Stéganographie\Stéganographie.cpp(41,30): warning C4309: 'initialisation' : troncation de valeur de constante
-  Stéganographie.vcxproj -> C:\Users\abroust\source\repos\Stéganographie\x64\Debug\Stéganographie.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Stéganographie.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Bits.cpp
+  Files.cpp
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(49,13): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(94,21): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(120,21): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(146,33): warning C4267: 'initialisation' : conversion de 'size_t' en 'uint32_t', perte possible de données
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(172,33): warning C4267: 'initialisation' : conversion de 'size_t' en 'uint32_t', perte possible de données
+  main.cpp
+  Message.cpp
+  Génération de code en cours...
+  Stéganographie.vcxproj -> C:\Users\brous\source\repos\Stegano\Stéganographie\x64\Debug\Stegano.exe
