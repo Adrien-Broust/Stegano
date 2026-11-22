@@ -5,6 +5,7 @@
 
 int main()
 {
+<<<<<<< HEAD
     try
     {
         auto bmp = Files::ReadAll("Apple.bmp");
@@ -20,5 +21,7 @@ int main()
     {
         std::cerr << "Erreur : " << e.what() << "\n";
     }
+=======
+>>>>>>> 2cb2c0afc2213d6e44c640b9c84222497a921d84
 }
 
