@@ -14,14 +14,4 @@ int main()
         Message::Embed(bmp, start, "Hello World", "cle"); 
         Files::WriteAll("Apple_stego.bmp", bmp);
 
-        auto loaded = Files::ReadAll("Apple_stego.bmp");
-        std::cout << Message::Extract(loaded, Files::PixelOffset(loaded), "cle") << "\n"; 
-    }
-    catch (const std::exception& e)
-    {
-        std::cerr << "Erreur : " << e.what() << "\n";
-    }
-=======
->>>>>>> 2cb2c0afc2213d6e44c640b9c84222497a921d84
 }
-
