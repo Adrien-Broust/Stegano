@@ -5,5 +5,6 @@
 int main()
 {
     Files imageApple;
-    imageApple.componantFile("Apple.bmp", 415, 151, 0);
+	imageApple.openFileBmp("Apple.bmp");
+	imageApple.componantFile("Apple.bmp", 0, 0, 0);
 }

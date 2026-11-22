@@ -1,3 +1,4 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Stéganographie.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
   Files.cpp
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(62,13): warning C4018: '>=' : incompatibilité signed/unsigned
   Stéganographie.vcxproj -> C:\Users\brous\Source\Repos\Stegano\Stéganographie\x64\Debug\Stegano.exe

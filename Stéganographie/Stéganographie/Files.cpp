@@ -12,7 +12,7 @@ void Files::openFileBmp(const char* file)
     read_file.read(reinterpret_cast<char*>(buffer.data()), buffersize);
     if (buffer[0] != 'B' || buffer[1] != 'M')
     {
-        std::cerr << "Erreur : Ce n'est pas un fichier BMP valide.";
+        std::cerr << "Erreur : Ce n'est pas un fichier BMP";
     }
     if (buffersize < 54)
     {
@@ -59,20 +59,25 @@ size_t Files::GetStride(const char* file)
 
 uint8_t Files::componantFile(const char* file, uint32_t row, uint32_t column, uint32_t channel)
 {
-    int32_t contraryRow = 0;
+    if (row >= height || column >= width || channel >= 3)
+    {
+        throw std::out_of_range("Pixel invalide");
+    }
+
+    uint32_t bmpRow;
+
     if (height > 0)
     {
-        contraryRow = std::abs(height);
+        bmpRow = height - 1 - row;
     }
     else
     {
-        contraryRow = row;
+        bmpRow = row;
     }
-    size_t index =
-        offsetPixel +
-        contraryRow * stride +
-        column * 3 +
-        channel;
+
+    size_t index = offsetPixel + bmpRow * stride + column * 3 + channel;
+	std::cout << "Colonne: " << column << ", Ligne: " << bmpRow << ", Canal: " << channel << std::endl;
+    std::cout << "Index: " << buffer[index] << std::endl;
     return buffer[index];
 }
 

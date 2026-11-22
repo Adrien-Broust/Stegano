@@ -15,7 +15,7 @@ private:
     uint32_t width;
     int32_t height;
     size_t stride;
-	std::vector<uint32_t> buffer;
+	std::vector<uint8_t> buffer;
 public:
     void openFileBmp(const char* file);
     void copyFile(const char* source, const char* destination);
