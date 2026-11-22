@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -28,5 +30,8 @@ public:
 	void hideOctet(uint32_t row, uint32_t column, uint32_t channel, uint8_t octet);
 	uint8_t extractBit(uint32_t row, uint32_t column, uint32_t channel);
 	uint8_t extractOctet(uint32_t row, uint32_t column, uint32_t channel);
+	void openFileBmp(const char* file);
+	std::vector<std::uint8_t> ReadAll(const char* file);
+	void WriteAll(const char* file, const std::vector<std::uint8_t>& data);
 };
 

@@ -1,13 +1,17 @@
 #include "Bits.h"
 #include "Files.h"
+#include "Message.h"
 #include <iostream>
 
 int main()
 {
-    Files imageApple;
-	imageApple.openFileBmp("Apple.bmp");
-	imageApple.componantFile(0, 0, 0);
-	imageApple.hideOctet(568, 169, 2, 'A');
-	std::cout << static_cast<int>(imageApple.extractOctet(568, 169, 2)) << std::endl;
+<<<<<<< HEAD
+    try
+    {
+        auto bmp = Files::ReadAll("Apple.bmp");
+        std::size_t start = Files::PixelOffset(bmp);
+
+        Message::Embed(bmp, start, "Hello World", "cle"); 
+        Files::WriteAll("Apple_stego.bmp", bmp);
 
 }

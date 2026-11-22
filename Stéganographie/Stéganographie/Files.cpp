@@ -125,6 +125,11 @@ uint8_t Files::extractOctet(uint32_t row, uint32_t column, uint32_t channel)
     }
     return octet;
 }
+void Files::WriteAll(const char* file, const std::vector<std::uint8_t>& data)
+{
+    std::ofstream out(file, std::ios::binary);
+    if (!out.is_open())
+        throw std::runtime_error("Cannot write file");
 
 void Files::copyFile(const char* file, const char* fileCopy)
 {
@@ -139,6 +144,8 @@ void Files::copyFile(const char* file, const char* fileCopy)
 		throw std::runtime_error("Cannot open copy file");
 	}
 	copy << origin.rdbuf();
+    out.write(reinterpret_cast<const char*>(data.data()),
+        static_cast<std::streamsize>(data.size()));
 }
 
 
