@@ -26,5 +26,7 @@ public:
     uint8_t componantFile(uint32_t row, uint32_t column, uint32_t channel);
 	void hideBit(uint32_t row, uint32_t column, uint32_t channel, uint8_t bit);
 	void hideOctet(uint32_t row, uint32_t column, uint32_t channel, uint8_t octet);
+	uint8_t extractBit(uint32_t row, uint32_t column, uint32_t channel);
+	uint8_t extractOctet(uint32_t row, uint32_t column, uint32_t channel);
 };
 

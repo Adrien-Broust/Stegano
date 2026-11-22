@@ -2,4 +2,7 @@
   Files.cpp
 C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(49,13): warning C4018: '>=' : incompatibilité signed/unsigned
 C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(94,21): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\brous\source\repos\Stegano\Stéganographie\Stéganographie\Files.cpp(120,21): warning C4018: '>=' : incompatibilité signed/unsigned
+  main.cpp
+  Génération de code en cours...
   Stéganographie.vcxproj -> C:\Users\brous\Source\Repos\Stegano\Stéganographie\x64\Debug\Stegano.exe

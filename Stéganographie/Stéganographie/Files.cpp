@@ -99,6 +99,33 @@ void Files::hideOctet(uint32_t row, uint32_t column, uint32_t channel, uint8_t o
     }
 }
 
+uint8_t Files::extractBit(uint32_t row, uint32_t column, uint32_t channel)
+{
+    uint8_t pixelValue = componantFile(row, column, channel);
+    return pixelValue & 1u;
+}
+
+uint8_t Files::extractOctet(uint32_t row, uint32_t column, uint32_t channel)
+{
+    uint8_t octet = 0;
+    for (int i = 0; i < 8; ++i)
+    {
+        uint8_t bit = extractBit(row, column, channel);
+        octet = (octet << 1) | bit;
+        ++column;
+        if (column >= width)
+        {
+            column = 0;
+            ++row;
+            if (row >= std::abs(height))
+            {
+                std::cerr << "Erreur : pas assez de place pour extraire l'octet";
+            }
+        }
+    }
+    return octet;
+}
+
 void Files::copyFile(const char* file, const char* fileCopy)
 {
 	std::ifstream origin(file, std::ios::binary);
