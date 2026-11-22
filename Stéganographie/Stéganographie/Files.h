@@ -9,8 +9,8 @@
 class Files
 {
 public:
-	static void openFileBmp(const char* file);
-	static std::vector<std::uint8_t> ReadAll(const char* file);
-	static void WriteAll(const char* file, const std::vector<std::uint8_t>& data);
+	void openFileBmp(const char* file);
+	std::vector<std::uint8_t> ReadAll(const char* file);
+	void WriteAll(const char* file, const std::vector<std::uint8_t>& data);
 };
 
