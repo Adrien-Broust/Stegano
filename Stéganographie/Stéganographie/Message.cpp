@@ -4,6 +4,8 @@
 
 void Message::ApplyXor(std::vector<std::uint8_t>& data, const std::string& key)
 {
+    if (key.empty())
+		throw std::invalid_argument("La cle ne peut pas etre vide");
     for (std::size_t i = 0; i < data.size(); ++i)
         data[i] ^= static_cast<std::uint8_t>(key[i % key.size()]);
 }
@@ -40,11 +42,12 @@ std::vector<std::uint8_t> Message::ReadBytes(const std::vector<std::uint8_t>& ca
     return result;
 }
 
-void Message::Embed(std::vector<std::uint8_t>& carrier, std::size_t start,
-    const std::string& text, const std::string& key)
+void Message::Embed(Files& image, uint32_t row, uint32_t column,
+    uint32_t channel, const std::string& text, const std::string& key)
 {
-    std::vector<std::uint8_t> payload(text.begin(), text.end());
-    std::uint8_t flags = 0;
+    std::vector<uint8_t> payload(text.begin(), text.end());
+
+    uint8_t flags = 0;
 
     if (!key.empty())
     {
@@ -52,18 +55,18 @@ void Message::Embed(std::vector<std::uint8_t>& carrier, std::size_t start,
         flags = Bits::SetBit(flags, FlagXor);
     }
 
-    std::vector<std::uint8_t> msg = { 'S', 'T', 'E', 'G', flags };
-    std::uint32_t len = static_cast<std::uint32_t>(payload.size());
+    std::vector<uint8_t> msg = { 'S', 'T', 'E', 'G', flags };
+
+    uint32_t len = static_cast<uint32_t>(payload.size());
+
     msg.push_back((len >> 24) & 0xFF);
     msg.push_back((len >> 16) & 0xFF);
     msg.push_back((len >> 8) & 0xFF);
     msg.push_back(len & 0xFF);
+
     msg.insert(msg.end(), payload.begin(), payload.end());
 
-    if (start + msg.size() * 8 > carrier.size())
-        throw std::runtime_error("Image trop petite pour ce message");
-
-    WriteBytes(carrier, start, msg);
+    image.WriteBytes(row, column, channel, msg);
 }
 
 std::string Message::Extract(const std::vector<std::uint8_t>& carrier,

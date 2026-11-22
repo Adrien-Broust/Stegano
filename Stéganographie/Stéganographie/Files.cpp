@@ -125,11 +125,70 @@ uint8_t Files::extractOctet(uint32_t row, uint32_t column, uint32_t channel)
     }
     return octet;
 }
+void Files::WriteBytes(uint32_t row, uint32_t column, uint32_t channel, const std::vector<uint8_t>& bytes)
+{
+	uint32_t absHeight = std::abs(height);
+    size_t start = row * width + column;
+    size_t capacity = width * absHeight;
+    size_t totalBits = bytes.size() * 8;
+
+    if (start > capacity || totalBits > capacity - start)
+        throw std::out_of_range("Image trop petite");
+
+    for (size_t i = 0; i < bytes.size(); ++i)
+    {
+        for (int b = 0; b < 8; ++b)
+        {
+            uint8_t bit = (bytes[i] >> (7 - b)) & 1;
+
+            size_t pos = start + i * 8 + b;
+
+            uint32_t currentRow = pos / width;
+            uint32_t currentColumn = pos % width;
+
+            hideBit(currentRow, currentColumn, channel, bit);
+        }
+    }
+}
+
+std::vector<uint8_t> Files::ReadBytes(uint32_t row, uint32_t column, uint32_t channel, size_t count)
+{
+	uint32_t absHeight = std::abs(height);
+    size_t start = row * width + column;
+    size_t capacity = width * absHeight;
+    size_t totalBits = count * 8;
+
+    if (start > capacity || totalBits > capacity - start)
+        throw std::out_of_range("Image trop petite");
+
+    std::vector<uint8_t> result(count, 0);
+
+    for (size_t i = 0; i < count; ++i)
+    {
+        for (int b = 0; b < 8; ++b)
+        {
+            size_t pos = start + i * 8 + b;
+
+            uint32_t currentRow = pos / width;
+            uint32_t currentColumn = pos % width;
+
+            uint8_t bit = extractBit(currentRow, currentColumn, channel);
+
+            result[i] = (result[i] << 1) | bit;
+        }
+    }
+    return result;
+}
+
+
 void Files::WriteAll(const char* file, const std::vector<std::uint8_t>& data)
 {
     std::ofstream out(file, std::ios::binary);
     if (!out.is_open())
         throw std::runtime_error("Cannot write file");
+    out.write(reinterpret_cast<const char*>(data.data()),
+        static_cast<std::streamsize>(data.size()));
+}
 
 void Files::copyFile(const char* file, const char* fileCopy)
 {
@@ -144,8 +203,6 @@ void Files::copyFile(const char* file, const char* fileCopy)
 		throw std::runtime_error("Cannot open copy file");
 	}
 	copy << origin.rdbuf();
-    out.write(reinterpret_cast<const char*>(data.data()),
-        static_cast<std::streamsize>(data.size()));
 }
 
 
